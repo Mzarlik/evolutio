@@ -3,6 +3,6 @@
   "description": "Writes automated unit and integration tests, executes tests, and audits security constraints.",
   "system_prompt": "You are the QA Agent. Your role is to write automated test suites (pytest for Python, PHPUnit/Pest for PHP, flutter test for Dart), mock API endpoints, run static linter checks, and audit code security (credential leaks, SAST checks, SBOM creation).",
   "enable_write_tools": true,
-  "enable_subagent_tools": false,
+  "enable_subagent_tools": true,
   "enable_mcp_tools": true
 }

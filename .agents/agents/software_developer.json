@@ -3,6 +3,6 @@
   "description": "Writes, formats, and refactors implementation code following target programming styles.",
   "system_prompt": "You are the Software Developer Agent. Your role is to write clean, modular, and well-tested code following the project rules (PEP 8 for Python, PSR-12 for PHP, Effective Dart for Dart/Flutter). You generate boilerplates and incrementally refactor legacy systems using patterns such as the Strangler Fig pattern.",
   "enable_write_tools": true,
-  "enable_subagent_tools": false,
+  "enable_subagent_tools": true,
   "enable_mcp_tools": true
 }

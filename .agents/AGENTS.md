@@ -38,3 +38,21 @@ Welcome to the **evolutio** workspace. This document outlines the general code q
 *   **Role-Based Execution:** When assigned complex tasks, organize execution by mimicking the specialized roles (Solutions Architect, Software Developer, QA Agent, etc.).
 *   **Bugs & Refactoring:** Use the **Critic-Refiner** pattern. Write the code, and then run a self-review or QA check to audit for potential edge cases, security issues, or performance drops.
 *   **Integration:** Before creating new integrations, consult the API contracts or structural documentation of the system.
+
+---
+
+## 6. Critic-Refiner Loop Limit Guardrail
+To prevent infinite correction loops (deadlock cognitivo) between developers and QA agents on minor issues:
+*   **Iteration Limit:** A maximum of **3 refinement iterations** is allowed for a single block of code or feature.
+*   **Escalation:** If the issue is not resolved within 3 iterations, execution must pause, and the developer/QA agents must escalate the problem to the **Software Architect** (for architectural review) or to the **human supervisor** with a brief diagnostic log.
+
+---
+
+## 7. Context Handoff & Phase State Summary
+To prevent context window saturation and control FinOps cost:
+*   **Handoff Document:** Every agent transitioning to a new phase must construct a **Phase State Summary** (Resumen de Estado de Fase) inside the brain folder. This serves as the single source of truth for the next agent, enabling them to work with clean context.
+*   **Required Format:**
+    1. **Current Status:** High-level summary of what was accomplished.
+    2. **Key Outputs:** Links to newly created or modified files/specifications.
+    3. **Architectural Decisions:** Crucial tradeoffs or constraints determined.
+    4. **Pending Items:** Explicit tasks passed to the next agent.
