@@ -56,3 +56,11 @@ To prevent context window saturation and control FinOps cost:
     2. **Key Outputs:** Links to newly created or modified files/specifications.
     3. **Architectural Decisions:** Crucial tradeoffs or constraints determined.
     4. **Pending Items:** Explicit tasks passed to the next agent.
+
+---
+
+## 8. Token Optimization and Context Pruning
+To optimize prompt tokens and prevent LLM context bloat:
+*   **JIT Skills Selection:** Feed only matching language/framework skills into the context based on task keywords.
+*   **Code Skeletonization:** Trim method bodies of reference files to simple signatures using AST or regex parsers, always bypassing client/server contract schemas (files with `contract`, `api`, `client`, or `dto` in their names) to prevent type drift.
+*   **Critic-Refiner Compression:** Trim redundant logs in loop cycles to extract only the raw code diffs and QA verdicts.
