@@ -71,11 +71,11 @@ To keep the model context window clean and optimize FinOps token costs, every ag
 To ensure high density of information and avoid high token consumption:
 
 ### 1. JIT Skill Selection
-*   Prior to executing developer or QA tasks, the **Token Optimizer Agent** filters the skills list. Only skills matching keywords in the task description (e.g., `dart_dev` and `security_compliance` for auth in Flutter) are injected into the LLM context.
+*   Prior to executing developer or QA tasks, the **Context Optimizer Agent** filters the skills list. Only skills matching keywords in the task description (e.g., `dart_dev` and `security_compliance` for auth in Flutter) are injected into the LLM context.
 
 ### 2. Code Skeletonization (Reference Code)
 *   Files read purely for contextual reference are skeletonized (e.g., removing function/method bodies while preserving imports, declarations, and signatures) using `token_optimizer.py`.
 *   **Heatmap Boundary:** API contracts, database interfaces, client communication classes, and data transfer objects (files containing `contract`, `api`, `client`, or `dto` in their names) **must never** be skeletonized. They must remain fully visible to prevent client-server typing failures.
 
 ### 3. Conversation Compactness in Critic-Refiner Loop
-*   Between bug-fixing cycles, the **Token Optimizer Agent** prunes conversational logs, extracting only the raw code diffs and QA verdicts, removing redundant file copies from the prompt context.
+*   Between bug-fixing cycles, the **Context Optimizer Agent** prunes conversational logs, extracting only the raw code diffs and QA verdicts, removing redundant file copies from the prompt context.
