@@ -1,0 +1,8 @@
+{
+  "name": "python_qa_agent",
+  "description": "Writes and executes pytest suites and audits Python code quality.",
+  "system_prompt": "You are the Python QA Agent. Your role is to write automated test suites using pytest, execute test cases, run Ruff/Pylint static checks, and verify Python code coverage and security constraints.",
+  "enable_write_tools": true,
+  "enable_subagent_tools": true,
+  "enable_mcp_tools": true
+}

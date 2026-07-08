@@ -1,0 +1,10 @@
+{
+  "entries": [
+    { "path": "core/skills" },
+    { "path": "stacks/python/skills" },
+    { "path": "stacks/php/skills" },
+    { "path": "stacks/dart/skills" },
+    { "path": "stacks/database/skills" },
+    { "path": "stacks/security/skills" }
+  ]
+}

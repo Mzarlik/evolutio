@@ -1,0 +1,2 @@
+# Schema Contracts Registry
+This folder holds shared API schemas (e.g. openapi.json) used to synchronize backend endpoints with Flutter Dart client models.

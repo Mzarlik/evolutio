@@ -88,7 +88,6 @@ def skeletonize_python(code: str) -> str:
 def skeletonize_regex(code: str) -> str:
     """Simple regex fallback to strip function bodies between curly brackets."""
     # Matches function declarations and their bodies in braces
-    # This is a basic implementation. Real environments might use full lexers.
     pattern = re.compile(
         r'(function\s+\w+\s*\(.*?\)\s*(?::\s*\w+)?\s*)\{(?:[^{}]|(?R))*\}',
         re.DOTALL
@@ -142,7 +141,6 @@ def compact_critic_history(raw_conversation: str) -> str:
         if in_diff:
             diff_block.append(line)
         else:
-            # Check for QA verdicts or critical error messages
             if any(verdict in line.lower() for verdict in ["verdict", "error", "fail", "approved", "rejection"]):
                 compacted.append(line)
                 

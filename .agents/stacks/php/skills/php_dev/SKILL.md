@@ -5,7 +5,7 @@ description: Guidelines and commands for developing, testing, and managing depen
 
 # PHP Development Skill
 
-This skill provides the execution patterns, commands, and best practices for developing PHP applications in this codebase.
+This skill provides the execution patterns, commands, and best practices for developing PHP applications.
 
 ## Code Standards & Strict Typing
 *   Every PHP file must declare strict typing at the very top:
@@ -23,18 +23,13 @@ Always use `composer`:
 *   Install dependencies: `composer install`
 *   Add a dependency: `composer require <package>`
 *   Add a dev dependency: `composer require --dev <package>`
-*   Dump autoload: `composer dump-autoload`
 
 ## Framework Best Practices (Laravel)
 *   **Eloquent Models:** Avoid placing complex business logic or raw queries inside controllers. Offload logic to Services or Repositories.
-*   **Migrations:** Always use migrations to modify databases: `php artisan make:migration <name>` and `php artisan migrate`.
-*   **Artisan Commands:**
-    *   Clear cache: `php artisan optimize:clear`
-    *   List routes: `php artisan route:list`
-    *   Run queues: `php artisan queue:work`
+*   **Migrations:** Always use migrations to modify databases.
+*   **Contract Export:** Whenever Laravel route footprints or database response types change, export/update the API schemas in `.agents/contracts/openapi.json`.
 
 ## Testing & Verification
 *   Tests are run via PHPUnit or Pest.
 *   **PHPUnit:** `vendor/bin/phpunit`
 *   **Pest:** `vendor/bin/pest`
-*   Ensure mock objects are used for external APIs in testing environments.

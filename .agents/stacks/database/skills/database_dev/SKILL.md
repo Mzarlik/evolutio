@@ -19,7 +19,7 @@ This skill provides guidelines and constraints for database schema design, migra
 *   **Query Logs:** Enable query logging in development or staging to monitor SQL volume.
 
 ## Indexing Policies
-*   **Foreign Keys:** Always add database indexes on foreign keys (`*_id` columns).
+*   **Foreign Keys:** Always add database indexes on foreign key (`*_id` columns).
 *   **Search Columns:** Index columns that are frequently used in `WHERE`, `ORDER BY`, or `JOIN` operations.
 *   **High Cardinality:** Prefer indexing high cardinality columns. Avoid indexing columns with very low uniqueness (e.g., boolean flags).
 

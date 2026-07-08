@@ -9,7 +9,7 @@ This skill outlines the minimum security requirements and compliance regulations
 
 ## Input Sanitization & Injection Prevention
 *   **SQL Injection:** Always use parameterized queries or ORM interfaces. Never concatenate user input directly into raw SQL query strings.
-*   **XSS Prevention:** Escape all output before rendering it in templates or HTML nodes. Use framework-provided escaping utilities (e.g., Blade `{{ }}` syntax in Laravel or Django's default escaping).
+*   **XSS Prevention:** Escape all output before rendering it in templates or HTML nodes. Use framework-provided escaping utilities.
 *   **Validation:** Apply strict request parameter validation on all endpoints (e.g., Pydantic models in FastAPI or Request validation classes in Laravel).
 
 ## Password Security

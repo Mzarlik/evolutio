@@ -5,7 +5,7 @@ description: Guidelines and commands for writing, testing, linting, and refactor
 
 # Python Development Skill
 
-This skill provides the execution patterns, commands, and best practices for developing Python applications in this codebase.
+This skill provides the execution patterns, commands, and best practices for developing Python applications.
 
 ## Code Style & Formatting
 *   Always format Python code before committing.
@@ -30,19 +30,15 @@ Otherwise, if `requirements.txt` is present:
 ### FastAPI / Starlette
 *   Always define query/path/body parameters using Pydantic schemas.
 *   Implement custom error handlers for standard HTTP exceptions.
-*   Ensure asynchronous endpoints use `async def` and non-async operations are run on threadpools or written as synchronous functions.
+*   Ensure asynchronous endpoints use `async def`.
+*   **Contract Export:** Whenever endpoint paths or Pydantic data schemas change, auto-export the updated OpenAPI specification to `.agents/contracts/openapi.json`.
 
 ### Django
 *   Keep logic inside services/models, not in views (skinny views, fat models/services).
 *   Always run migrations: `python manage.py makemigrations` and `python manage.py migrate`.
 *   Avoid raw SQL queries; use Django ORM unless strictly necessary for optimization.
 
-### Flask
-*   Structure applications using Blueprints for modularity.
-*   Use Flask-SQLAlchemy or Flask-Migrate for database handling and schema migrations.
-
 ## Testing & Verification
 *   Use `pytest` for all unit and integration testing.
 *   Run all tests: `pytest`
 *   Run specific test file: `pytest tests/test_filename.py`
-*   Run test with coverage: `pytest --cov=src`

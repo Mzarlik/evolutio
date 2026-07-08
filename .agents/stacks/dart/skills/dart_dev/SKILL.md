@@ -11,25 +11,23 @@ This skill provides the execution patterns, commands, and best practices for dev
 *   Follow the **Effective Dart** rules.
 *   Format code using: `dart format .`
 *   Analyze code: `dart analyze` or `flutter analyze`
-*   Variables and parameter names must be `camelCase`.
-*   Classes, enums, extensions, and mixins must be `PascalCase`.
-*   Source files, directories, and package names must be `snake_case`.
 
 ## Dependency Management
 Use the `pub` package manager:
 *   Get dependencies: `flutter pub get` or `dart pub get`
 *   Upgrade dependencies: `flutter pub upgrade` or `dart pub upgrade`
 *   Add dependency: `flutter pub add <package>`
-*   Add dev dependency: `flutter pub add --dev <package>`
 
 ## Flutter Coding Best Practices
 *   **Widget Composition:** Prefer breaking down large widget trees into smaller, reusable stateless widgets.
 *   **State Management:** Follow clean architecture; decouple business logic from the UI layer (e.g., using BLoC, Riverpod, Provider, or Cubit).
-*   **Constants:** Make constructor parameters `const` whenever possible to optimize rendering performance.
-*   **Asset Management:** Ensure all asset pathways are declared correctly in `pubspec.yaml`.
+
+## API Contract Synchronization
+*   **Decoupled Sync:** The Dart client/mobile frontend must never query backend python/php source directories directly.
+*   **Schema Source:** Read the OpenAPI specification from the shared folder `.agents/contracts/openapi.json`.
+*   **Generation:** Run standard Dart code generation tools (e.g., `build_runner` or `openapi-generator`) to auto-generate models, types, and services using the shared schema.
+*   Run command: `flutter pub run build_runner build --delete-conflicting-outputs`
 
 ## Testing & Verification
 *   Tests should be located under the `test/` directory.
 *   Run unit/widget tests: `flutter test`
-*   Run specific test: `flutter test test/widget_test.dart`
-*   Generate test coverage: `flutter test --coverage`
