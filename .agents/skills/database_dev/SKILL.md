@@ -27,3 +27,10 @@ This skill provides guidelines and constraints for database schema design, migra
 *   If a canary deployment fails or generates anomalous latencies/errors, automatically trigger rollback scripts:
     *   Run backward migration steps.
     *   Revert connection configurations to the stable database replica if split.
+
+## Client API Synchronization
+*   During multi-step database migrations, ensure that the `api_contract_sync` agent is notified of intermediate states. 
+*   **Synchronization Flow:**
+    1.  **Add Phase:** Add new database columns/tables.
+    2.  **Sync Phase:** Write logic to sync data from the old fields to the new fields (both structures coexist).
+    3.  **Client Sync Point:** The `api_contract_sync` agent must be instructed to delay final client Dart type updates until the backend data sync has completed and the old fields are ready to be phased out.

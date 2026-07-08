@@ -59,3 +59,7 @@ To keep the model context window clean and optimize FinOps token costs, every ag
 2.  **Key Outputs:** Links to newly created or modified files/specifications.
 3.  **Architectural Decisions:** Crucial tradeoffs or constraints determined.
 4.  **Pending Items:** Explicit tasks passed to the next agent.
+
+### Verification Guardrail:
+*   Before the task is officially handed over to the next agent persona, the **Technical Writer Agent** must audit the Phase State Summary.
+*   The Technical Writer will halt progression if any of the 4 mandatory points (Status, Outputs, Decisions, Pending) are missing or insufficient.
