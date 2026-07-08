@@ -43,7 +43,9 @@ When executing or coordinating tasks, align work with the appropriate phase and 
 
 ### 2. Critic-Refiner Pattern
 *   For critical components (e.g., security logic, deployment scripts, core APIs), use a critic agent (QA/DevSecOps) to inspect the generated code of the developer agent.
-*   **Guardrail (Loop Limit):** A maximum of **3 refinement iterations** is allowed for a single code block. If the issue is not resolved after the 3rd iteration, the loop must terminate, and the problem must be escalated to the **Software Architect** or **human supervisor** with a diagnostic log.
+*   **Git Backup Step:** Before beginning editing or refinement loops, the agent must run `git stash` to capture a clean snapshot or create a temporary branch (e.g., `git checkout -b feature/bug-refinement-failed`).
+*   **Guardrail (Loop Limit):** A maximum of **3 refinement iterations** is allowed for a single code block. 
+*   **Escalation & Rollback:** If the issue is not resolved after the 3rd iteration, the loop must terminate, and the problem must be escalated to the **Software Architect** or **human supervisor** with a diagnostic log. The repository can be instantly restored to the pre-refinement state using a single command (e.g., `git restore .` or `git checkout main`).
 
 ### 3. Router-Classifier Pattern
 *   When receiving ambiguous user tickets or system anomalies, use a router agent to classify the issue domain (e.g., DB, Frontend, API, Infrastructure) and delegate it to the matching specialized subagent.
@@ -70,12 +72,16 @@ To keep the model context window clean and optimize FinOps token costs, every ag
 
 To ensure high density of information and avoid high token consumption:
 
-### 1. JIT Skill Selection
+### 1. Prompt Caching Predictability
+*   To leverage the LLM's prompt caching mechanics, load larger static files (such as `AGENTS.md` and default framework instructions) at the absolute front of the prompt context in a fixed, stable order.
+*   Append dynamic parameters (JIT skills, task-specific skeletons, logs) at the end of the context to prevent cache invalidation.
+
+### 2. JIT Skill Selection
 *   Prior to executing developer or QA tasks, the **Context Optimizer Agent** filters the skills list. Only skills matching keywords in the task description (e.g., `dart_dev` and `security_compliance` for auth in Flutter) are injected into the LLM context.
 
-### 2. Code Skeletonization (Reference Code)
+### 3. Code Skeletonization (Reference Code)
 *   Files read purely for contextual reference are skeletonized (e.g., removing function/method bodies while preserving imports, declarations, and signatures) using `token_optimizer.py`.
 *   **Heatmap Boundary:** API contracts, database interfaces, client communication classes, and data transfer objects (files containing `contract`, `api`, `client`, or `dto` in their names) **must never** be skeletonized. They must remain fully visible to prevent client-server typing failures.
 
-### 3. Conversation Compactness in Critic-Refiner Loop
+### 4. Conversation Compactness in Critic-Refiner Loop
 *   Between bug-fixing cycles, the **Context Optimizer Agent** prunes conversational logs, extracting only the raw code diffs and QA verdicts, removing redundant file copies from the prompt context.

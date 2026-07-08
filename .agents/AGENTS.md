@@ -4,7 +4,9 @@ Welcome to the **evolutio** workspace. This document outlines the general code q
 
 ## 1. General Principles
 *   **Documentation:** Always maintain inline comments, docstrings, and README files. Explain the *why*, not just the *what*.
-*   **Git Best Practices:** Commit messages should be clear, concise, and follow Conventional Commits (e.g., `feat:`, `fix:`, `docs:`, `refactor:`).
+*   **Git Best Practices:** 
+    *   Commit messages must be clear, concise, and follow Conventional Commits (e.g., `feat:`, `fix:`, `docs:`, `refactor:`).
+    *   **Automated Backup Rule:** Before starting an autonomous code editing or bug-fixing loop, the agent must run `git stash` to capture a clean snapshot or create a temporary branch (e.g., `git checkout -b feature/bug-refinement-failed`). If refinement fails and escalates, the codebase can be restored instantly using a single git revert/restore command.
 *   **Security:** Never commit credentials, tokens, or sensitive configuration details. Use environment variables (via `.env` templates).
 
 ---
@@ -61,6 +63,7 @@ To prevent context window saturation and control FinOps cost:
 
 ## 8. Token Optimization and Context Pruning
 To optimize prompt tokens and prevent LLM context bloat:
+*   **Prompt Caching Predictability:** To maximize the hit rate of model caches, static files of larger size (like `AGENTS.md` and basic rules of `asdlc_workflow/SKILL.md`) must be loaded at the absolute prefix of the prompt context in a fixed, stable order. Dynamic elements (JIT skills, task-specific skeletons, diffs) must be appended at the end of the prompt context.
 *   **JIT Skills Selection:** Feed only matching language/framework skills into the context based on task keywords.
 *   **Code Skeletonization:** Trim method bodies of reference files to simple signatures using AST or regex parsers, always bypassing client/server contract schemas (files with `contract`, `api`, `client`, or `dto` in their names) to prevent type drift.
 *   **Critic-Refiner Compression:** Trim redundant logs in loop cycles to extract only the raw code diffs and QA verdicts.

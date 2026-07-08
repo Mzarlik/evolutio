@@ -22,3 +22,4 @@ Core behavior to enforce lean, high-density context windows across the MAS lifec
 ## Execution Rules
 - **Rule 1:** Always protect API schemas. Any structural rewrite must keep properties fully expanded.
 - **Rule 2:** Lean execution. Prefer local AST (Abstract Syntax Tree) parsers or regex rules over heavy LLM prompts to perform the text skeletization.
+- **Rule 3:** Prompt Caching Predictability. Maintain static configurations (`AGENTS.md` and basic framework rules) at the absolute front of the prompt context in a fixed, stable order. Dynamic elements (JIT skills, custom code skeletons, and conversation logs) must be appended at the end of the prompt context to prevent cache invalidation.
